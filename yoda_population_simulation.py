@@ -4,10 +4,10 @@ import matplotlib as mp
 #declare initial varaibles for Yoda characteristics and universe
 startingPopulation = 10 #arbitatry start number
 
-infantMortality = 50 #we see very few Yodas in the SW universe, so I assume a high mortality rate since the Yodas who do survive are quite old
+infantMortality = 5 #we see very few Yodas in the SW universe, so I assume a high mortality rate since the Yodas who do survive are quite old
 
 #Yodas seem to be omniverous species, so I modeled population growth with two sources
-frogsAvailable = 5 #per Yoda
+frogsAvailable = 40 #per Yoda
 
 mushroomsAvailable = 20 #per Yoda
 
@@ -15,13 +15,17 @@ frogsHarvested = 0
 
 mushroomsHarvested = 0
 
+millenium = 100
+
+numYears = 0
+
 '''Yodas don't age the same way as humans, so I approximated
 a female Yoda's fertile period based of an analysis by Jon Chase in
 this article from Popular Mechanics: https://www.popularmechanics.com/culture/tv/a30079354/baby-yoda/#:~:text=What%20does%20this%20mean%20for,495%20years%2C%E2%80%9D%20Chase%20says. '''
 fertilityx = 90 #according to Jon Chase, youngest age that Yoda might reach maturity
 fertilityy = 495 #according to Jon Chase, oldest age that Yoda might reach maturity
 
-deathStarChance = .01 #chance of Yoda genocide
+deathStarChance = .5 #chance of Yoda genocide
 
 yodaDict = [] #will store each member of Yoda population as Yoda object
 
@@ -46,8 +50,10 @@ def harvest(frogsHarvested, mushroomsHarvested, mushroomsAvailable, frogsAvailab
     #Yodas can survive on either frogs or mushrooms. If there are neither enough frogs nor mushrooms, then Yodas will die.
 
     if frogsAvailable < len(yodaDict) and mushroomsAvailable < len(yodaDict):
-            del yodaDict[0:int(len(yodaDict)-frogsAvailable)]
-            del yodaDict[0:int(len(yodaDict)-mushroomsAvailable)]
+            if mushroomsAvailable <= frogsAvailable:
+                del yodaDict[0:int(len(yodaDict)-mushroomsAvailable)]
+            else:
+                del yodaDict[0:int(len(yodaDict)-frogsAvailable)]
 
     else:
         if frogsAvailable < len(yodaDict):
@@ -99,14 +105,16 @@ def runYear(frogsHarvested, mushroomsHarvested, mushroomsAvailable, frogsAvailab
 
     print(len(yodaDict))
     #Yoda society advances over time, reducing infantMortality
-    infantMortality *= 0.55
+    infantMortality *= 0.985
     return infantMortality
 
 
 beginSim()
-#runs simulation until we get to 100000
-while len(yodaDict)<50 and len(yodaDict) > 1:
+#runs simulation for 1000 years
+for year in range(millenium):
     infantMortality = runYear(frogsHarvested, mushroomsHarvested, mushroomsAvailable, frogsAvailable, fertilityx, fertilityy, infantMortality, deathStarChance)
+
+print("In one millenium, the Yoda population grew to " + str(len(yodaDict)))
     
 
 
