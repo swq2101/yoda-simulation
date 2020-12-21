@@ -2,9 +2,9 @@ import random
 import matplotlib as mp 
 
 #declare initial varaibles for Yoda characteristics and universe
-startingPopulation = 100 #arbitatry start number
+startingPopulation = 10 #arbitatry start number
 
-infantMortality = 95 #we see very few Yodas in the SW universe, so I assume a high mortality rate since the Yodas who do survive are quite old
+infantMortality = 50 #we see very few Yodas in the SW universe, so I assume a high mortality rate since the Yodas who do survive are quite old
 
 #Yodas seem to be omniverous species, so I modeled population growth with two sources
 frogsAvailable = 5 #per Yoda
@@ -21,7 +21,7 @@ this article from Popular Mechanics: https://www.popularmechanics.com/culture/tv
 fertilityx = 90 #according to Jon Chase, youngest age that Yoda might reach maturity
 fertilityy = 495 #according to Jon Chase, oldest age that Yoda might reach maturity
 
-deathStarChance = 2 #chance of Yoda genocide
+deathStarChance = .01 #chance of Yoda genocide
 
 yodaDict = [] #will store each member of Yoda population as Yoda object
 
@@ -40,23 +40,26 @@ def harvest(frogsHarvested, mushroomsHarvested, mushroomsAvailable, frogsAvailab
             ableYodas += 1
     
     #each able Yoda can harvest between 1 and foodAvailable. To simplify the simulation, all able Yodas will harvest the same amount of food in the cyclegit
-    frogsHarvested += ableYodas * random.randint(1, frogsAvailable)
-    mushroomsHarvested += ableYodas * random.randint(1, mushroomsAvailable)
+    frogsHarvested += ableYodas * frogsAvailable
+    mushroomsHarvested += ableYodas * mushroomsAvailable
 
-    '''No vegetarian Yodas. To simplify the Yoda simulation, if there are not enough mushroomsAvailable
-    or frogsAbailable for each Yoda to have 1, then the unfed Yodas will die'''
+    #Yodas can survive on either frogs or mushrooms. If there are neither enough frogs nor mushrooms, then Yodas will die.
 
-    if frogsAvailable < len(yodaDict) or mushroomsAvailable < len(yodaDict):
-        if frogsAvailable < len(yodaDict) and mushroomsAvailable >= len(yodaDict):
-            del yodaDict[0:int(len(yodaDict)-frogsAvailable)]
-        elif mushroomsAvailable < len(yodaDict) and frogsAvailable >= len(yodaDict):
-            del yodaDict[0:int(len(yodaDict)-mushroomsAvailable)]
-        elif mushroomsAvailable < len(yodaDict) and frogsAvailable < len(yodaDict):
+    if frogsAvailable < len(yodaDict) and mushroomsAvailable < len(yodaDict):
             del yodaDict[0:int(len(yodaDict)-frogsAvailable)]
             del yodaDict[0:int(len(yodaDict)-mushroomsAvailable)]
+
     else:
-        frogsAvailable -= len(yodaDict)
-        mushroomsAvailable -= len(yodaDict)
+        if frogsAvailable < len(yodaDict):
+            mushroomsAvailable -= len(yodaDict)
+            frogsAvailable = 0
+        elif mushroomsAvailable < len(yodaDict):
+            frogsAvailable -= len(yodaDict)
+            mushroomsAvailable = 0
+        else:
+            mushroomsAvailable -= len(yodaDict)
+            frogsAvailable -= len(yodaDict)
+
 
 #simulate reproduction
 def reproduce(fertilityx, fertilityy):
@@ -90,20 +93,20 @@ def runYear(frogsHarvested, mushroomsHarvested, mushroomsAvailable, frogsAvailab
     print(len(yodaDict))
 
     #chance the Death Star destroys the planet, wiping out the species
-    if random.randint(0,100) == deathStarChance:
+    if random.uniform(0,100) == deathStarChance:
         del yodaDict[0:len(yodaDict)]
 
 
     print(len(yodaDict))
     #Yoda society advances over time, reducing infantMortality
-    infantMortality *= 0.985
+    infantMortality *= 0.55
     return infantMortality
 
 
 beginSim()
 #runs simulation until we get to 100000
-while len(yodaDict)<100 and len(yodaDict) > 1:
-    runYear(frogsHarvested, mushroomsHarvested, mushroomsAvailable, frogsAvailable, fertilityx, fertilityy, infantMortality, deathStarChance)
+while len(yodaDict)<50 and len(yodaDict) > 1:
+    infantMortality = runYear(frogsHarvested, mushroomsHarvested, mushroomsAvailable, frogsAvailable, fertilityx, fertilityy, infantMortality, deathStarChance)
     
 
 
