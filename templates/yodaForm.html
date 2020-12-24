@@ -7,9 +7,22 @@
         <body>
             <h1>A New Hope for Yoda</h1>
             <div class="center">
+            <form>
                 <p>Your mission is to help Grogu and his friends repopulate.</p>
                 <p>Decide how many members of the Yoda species will live on Dagobah to start with.</p>
-
+                <p>These Yodas will be of reproductive age. Yodas have a high infant mortality rate, so a bigger number is better.</p>
+                <input type="number" min="10" id="pop" name="startingPopulation" placeholder="Choose a number">
+                <p>The Yoda species is picky about its food.</p>
+                <p>They require frogs and mushrooms to survive. In desparate times, they can live off one source.</p>
+                <p>You must decide how what quantity of food each able-bodied Yoda must procure.</p>
+                <p>How many frogs should each Yoda catch?</p>
+                <input type="number" min="1"id="frogs" name="frogsHarvested" placeholder="Choose a number">
+                <p>How many mushrooms should each Yoda harvest?</p>
+                <input type="number" min="1" id="shrooms" name="mushroomsHarvested" placeholder="Choose a number.">
+                <label>
+                    <input type="submit">
+                </label>
+            </form>
             </div>
         
         </body>
