@@ -19,6 +19,8 @@ millenium = 100
 
 numYears = 0
 
+currentPopulation = 0
+
 '''Yodas don't age the same way as humans, so I approximated
 a female Yoda's fertile period based of an analysis by Jon Chase in
 this article from Popular Mechanics: https://www.popularmechanics.com/culture/tv/a30079354/baby-yoda/#:~:text=What%20does%20this%20mean%20for,495%20years%2C%E2%80%9D%20Chase%20says. '''
@@ -102,19 +104,15 @@ def runYear(frogsHarvested, mushroomsHarvested, mushroomsAvailable, frogsAvailab
     if random.uniform(0,100) == deathStarChance:
         del yodaDict[0:len(yodaDict)]
 
-
-    print(len(yodaDict))
-    #Yoda society advances over time, reducing infantMortality
-    infantMortality *= 0.985
-    return infantMortality
+    return len(yodaDict)
 
 
 beginSim()
 #runs simulation for 1000 years
 for year in range(millenium):
-    infantMortality = runYear(frogsHarvested, mushroomsHarvested, mushroomsAvailable, frogsAvailable, fertilityx, fertilityy, infantMortality, deathStarChance)
+    currentPopulation = runYear(frogsHarvested, mushroomsHarvested, mushroomsAvailable, frogsAvailable, fertilityx, fertilityy, infantMortality, deathStarChance)
 
-print("In one millenium, the Yoda population grew to " + str(len(yodaDict)))
+print("In one millenium, the Yoda population grew to " + str(currentPopulation))
     
 
 
