@@ -1,0 +1,35 @@
+@font-face {
+    font-family: Death Star;
+    src: url('../static/death-star-font/DeathStar-VmWB.ttf');
+}
+
+@font-face{
+    font-family: Distant Galaxy;
+    src: url('../static/sf_distant_galaxy/SF\ Distant\ Galaxy\ AltOutline.ttf')
+}
+
+body{
+    background-image: url(../static/images/resultDagobah.jpeg);
+}
+
+h1{
+    text-align: center;
+    font-family: Distant Galaxy;
+    font-size: 75px;
+    color: whitesmoke;
+}
+
+h2{
+    text-align: center;
+    font-family: Distant Galaxy;
+    font-size: 75px;
+    color: whitesmoke;
+}
+
+p{
+    font-family: Death Star;
+    text-align: center;
+    color: whitesmoke;
+    font-size: 30px;
+}
+
