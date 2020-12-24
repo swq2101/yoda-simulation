@@ -98,7 +98,6 @@ def runYear(frogsHarvested, mushroomsHarvested, mushroomsAvailable, frogsAvailab
         else:
             yoda.age +=1
     
-    print(len(yodaDict))
 
     #chance the Death Star destroys the planet, wiping out the species
     if random.uniform(0,100) == deathStarChance:
@@ -107,12 +106,6 @@ def runYear(frogsHarvested, mushroomsHarvested, mushroomsAvailable, frogsAvailab
     return len(yodaDict)
 
 
-beginSim()
-#runs simulation for 1000 years
-for year in range(millenium):
-    currentPopulation = runYear(frogsHarvested, mushroomsHarvested, mushroomsAvailable, frogsAvailable, fertilityx, fertilityy, infantMortality, deathStarChance)
-
-print("In one millenium, the Yoda population grew to " + str(currentPopulation))
     
 
 
