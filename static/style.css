@@ -1,8 +1,30 @@
+@font-face {
+    font-family: Death Star;
+    src: url('../static/death-star-font/DeathStar-VmWB.ttf');
+}
+
+@font-face{
+    font-family: Distant Galaxy;
+    src: url('../static/sf_distant_galaxy/SF\ Distant\ Galaxy\ AltOutline.ttf')
+}
 
 h1{
     text-align: center;
-    font-style: url('../static/star_jedi/starjedi/Starjedi.ttf');
+    font-family: Distant Galaxy;
+    font-size: 75px;
 }
 body{
     background-image: url("../static/images/dagobah.jpeg");
+}
+
+.center {
+    margin: auto;
+    width: 40%;
+    border: 3px solid #FFFFFF;
+    padding: 10px;
+}
+
+p{
+    font-family: Death Star;
+    text-align: center;
 }
