@@ -1,0 +1,21 @@
+<!Doctype html!>
+    <html>
+        <head>
+            <link rel="stylesheet" href="../static/resultStyle.css" type="text/css"> 
+            <title>Return of the Yoda</title>
+        </head>
+        <body>
+            <h1>In one millenium, the Yoda population grew to: </h1>
+            <h2>{{ current_population }}</h2>
+            <p>{{ result }}</p>
+            <center>
+                {% if showImage %}
+                <img src="../static/images/happyBabyYoda.gif">
+                {% else %} 
+                <img src="../static/images/sadBabyYoda.gif">
+                {% endif %}
+                
+            </center>
+
+        </body>
+    </html>
