@@ -12,6 +12,7 @@ h1{
     text-align: center;
     font-family: Distant Galaxy;
     font-size: 75px;
+    color: whitesmoke;
 }
 body{
     background-image: url("../static/images/dagobah.jpeg");
@@ -27,4 +28,22 @@ body{
 p{
     font-family: Death Star;
     text-align: center;
+    color: whitesmoke;
 }
+
+input{
+    display: block;
+    margin : 0 auto;
+    color: #FFFFFF;
+    background-color: black;
+}
+
+input[type=submit]{
+    display: block;
+    margin : 12px auto;
+    color: #FFFFFF;
+    font-family: Death Star;
+    background-color: black; 
+    padding: 20px; 
+    padding: 20px;
+  }
