@@ -15,7 +15,7 @@ frogsHarvested = 0
 
 mushroomsHarvested = 0
 
-millenium = 100
+millenium = 1000
 
 numYears = 0
 
