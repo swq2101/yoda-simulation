@@ -6,6 +6,8 @@ app = Flask(__name__)
 currentPopulation = 0
 frogsAvailable = 0
 mushroomsHarvested = 0
+result = ""
+imageResult = False
 
 @app.route('/')
 def submit_form():
@@ -21,15 +23,28 @@ def load_form():
     for year in range(0, yoda_population_simulation.millenium):
         currentPopulation = yoda_population_simulation.runYear(yoda_population_simulation.frogsHarvested, yoda_population_simulation.mushroomsHarvested, mushroomsAvailable, frogsAvailable, yoda_population_simulation.fertilityx, yoda_population_simulation.fertilityy, yoda_population_simulation.infantMortality, yoda_population_simulation.deathStarChance)
         print(str(currentPopulation))
+    imageResult = False
+    
+    if currentPopulation >= 10:
+        result = "The Yoda population is no longer endangered!"
+        imageResult = True
+    elif currentPopulation == 0:
+        result = "Uh oh. Your planet was destroyed by the Death Star."
+    else:
+        result = "The Yoda population is still in danger."
+        
     
     templateData = {
         'starting_population': yoda_population_simulation.startingPopulation,
         'current_population': currentPopulation,
         'frogs_available': frogsAvailable,
-        'mushrooms_available': mushroomsAvailable
+        'mushrooms_available': mushroomsAvailable,
+        'result':result
     }   
-
-    return render_template('yodaResult.html', **templateData)
+    if imageResult:
+        return render_template('yodaResult.html', **templateData, showImage=True)
+    
+    return render_template('yodaResult.html', **templateData, showImage=False)
 
 
 
